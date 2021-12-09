@@ -1,3 +1,5 @@
+import time
+
 from .base_page import BasePage
 from locators import MainPageLocators
 
@@ -8,7 +10,9 @@ class LoginPage(BasePage):
         self.should_be_register_form()
 
     def should_be_login_url(self):
-        assert self.browser.find_element(*MainPageLocators.LOGIN_LINK), "Login link is not presented"
+        self.browser.find_element(*MainPageLocators.LOGIN_LINK).click()
+        time.sleep(3)
+        assert self.browser.current_url.find('login') != -1
 
     def should_be_login_form(self):
         self.browser.find_element(*MainPageLocators.LOGIN_LINK).click()
